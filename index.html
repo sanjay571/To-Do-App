@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo-App</title>
+    <style>
+        body{
+            background-color: rgb(238, 211, 176);
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(34, 31, 31);
+        }
+        form{
+            text-align: center;
+            padding: 18% 40px;
+        }
+        input{
+            width: 300px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        button{
+            background-color: green;
+            color: aliceblue;
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+        ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 500px;
+    margin: auto;
+}
+
+li {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+    </style>
+       
+</head>
+<body>
+    
+    <form action="/add" method="POST">
+        <h2>
+        My To-Do List
+    </h2>
+        <input type="text" name="task" required ><br><br>
+        <button type ="submit">Add Task</button>
+
+    </form>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {% if task[2] == 1 %}
+               <s>{{ task[1] }}</s>
+            { % else %}
+               {{ task[1] }}
+               <a href="/complete/{{ task[0] }}">Done</a>
+               {% endif %}
+            <a href="/delete/{{ task[0] }}">Delete</a>
+            
+
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
